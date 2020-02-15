@@ -16,5 +16,16 @@ namespace BerlinClock.Tests
             // Arrange, Act
             var clock = new BerlinClockImpl(emptyTime);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        [DataRow("jksdhfksdhf")]
+        [DataRow("12:00:00k")]
+        [DataRow("25:00:00")]
+        [DataRow("25:00:00")]
+        public void ThrowArgumentExceptionIfctorParameterCannotBeParsed(String incorrectTime)
+        {
+
+        }
     }
 }
