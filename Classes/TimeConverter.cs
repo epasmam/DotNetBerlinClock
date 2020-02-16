@@ -1,20 +1,30 @@
 ﻿using BerlinClock.Abstraction;
 using System;
 
-namespace BerlinClock
+namespace BerlinClock.Classes
 {
     public class TimeConverter : ITimeConverter
     {
-        private IClockRenderer<String> _renderer;
+        private const string RendererNotProvidedErrorMessage = "Renderer should be provided";
+        private const string BuilderNotProvidedErrorMessage = "Builder should be provided";
 
-        public TimeConverter(IClockRenderer<String> renderer)
+        private IClockRenderer<String> _renderer;
+        private IClockBuilder _builder;
+
+        public TimeConverter(IClockRenderer<String> renderer, IClockBuilder builder)
         {
-            _renderer = renderer;
+            if (renderer == null)
+                throw new ArgumentNullException(nameof(renderer), RendererNotProvidedErrorMessage);
+            if (builder == null)
+                throw new ArgumentNullException(nameof(builder), BuilderNotProvidedErrorMessage);
+            this._renderer = renderer;
+            this._builder = builder;
         }
 
         public string ConvertTime(string aTime)
         {
-            return _renderer.RenderClocks(new Classes.BerlinClockImpl(aTime));
+            IBerlinClock clock = this._builder.BuildClocks(aTime);
+            return _renderer.RenderClocks(clock);
         }
     }
 }

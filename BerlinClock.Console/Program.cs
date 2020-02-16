@@ -1,5 +1,7 @@
-﻿using BerlinClock.Abstraction;
-using System;
+﻿using System;
+
+using BerlinClock.Abstraction;
+using BerlinClock.Classes;
 
 namespace BerlinClock.ConsoleOutput
 {
@@ -7,7 +9,7 @@ namespace BerlinClock.ConsoleOutput
     {
         static void Main(string[] args)
         {
-            ITimeConverter timeConverter = new BerlinClock.TimeConverter(new BerlinClock.Classes.TextClockRenderer());
+            ITimeConverter timeConverter = new TimeConverter(new TextClockRenderer(), new ClockBuilder(new TimeParser()));
             while (Console.KeyAvailable == false)
             {
                 Console.BackgroundColor = ConsoleColor.White;

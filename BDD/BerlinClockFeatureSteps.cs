@@ -10,7 +10,7 @@ namespace BerlinClock
     [Binding]
     public class TheBerlinClockSteps
     {
-        private ITimeConverter berlinClock = new TimeConverter(new TextClockRenderer());
+        private ITimeConverter berlinClock = new TimeConverter(new TextClockRenderer(), new ClockBuilder(new TimeParser()));
         private String theTime;
 
         
