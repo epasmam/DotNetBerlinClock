@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using BerlinClock.Abstraction;
 
 namespace BerlinClock.Classes
 {
-    public class BerlinClockImpl
+    public class BerlinClockImpl : IBerlinClock
     {
         private Int32 _seconds;
         private Int32 _minutes;
@@ -16,99 +14,40 @@ namespace BerlinClock.Classes
         private const string IncorrectArgumentErrorMessage = "inputTime parameter should contain correct time";
         // the only non-parseable time.
         private const string Midnight2400 = "24:00:00";
+        private const string TimeFormat = "HH:mm:ss";
 
-        private const Char Yellow = 'Y';
-        private const Char Red = 'R';
-        private const Char Empty = 'O';
-
-        public Boolean Blinker
+        private Boolean[] intToBooleanBulb(int currentTime, int bulbsCount)
         {
-            get
+            var result = new Boolean[bulbsCount];
+            int currentIndex = 0;
+            while((currentTime = currentTime - 1) >= 0)
             {
-                return (this._seconds & 1) == 0;
+                result[currentIndex++] = true;
             }
+            return result;
         }
 
-        public Boolean[] Fivers
-        {
-            get
-            {
-                var fivers = new Boolean[4];
-                int currentIndex = 0;
-                int currentTime = this._hours / 5;
-                while((currentTime = currentTime - 1) >= 0)
-                {
-                    fivers[currentIndex++] = true;
-                }
-                return fivers;
-            }
-        }
+        public Boolean Blinker => (this._seconds & 1) == 0;
 
-        public Boolean[] Hours
-        {
-            get
-            {
-                var hours = new Boolean[4];
+        public Boolean[] FiveHoursBulbs => intToBooleanBulb(this._hours / 5, 4);
 
-                int currentIndex = 0;
-                int currentTime = this._hours % 5;
-                while((currentTime = currentTime - 1) >= 0)
-                {
-                    hours[currentIndex++] = true;
-                }
+        public Boolean[] HoursBulbs => intToBooleanBulb(this._hours % 5, 4);
 
-                return hours;
-            }
-        }
+        public Boolean[] FiveMinutesBulbs => intToBooleanBulb(this._minutes / 5, 11);
 
-        public Boolean[] MinutesFivers
-        {
-            get
-            {
-                var minutesFivers = new Boolean[11];
-
-                int currentIndex = 0;
-                int currentTime = this._minutes / 5;
-                while((currentTime = currentTime - 1) >= 0)
-                {
-                    minutesFivers[currentIndex++] = true;
-                }
-
-                return minutesFivers;
-            }
-        }
-
-        public Boolean[] Minutes
-        {
-            get
-            {
-                var minutes = new Boolean[4];
-                int currentIndex = 0;
-                int currentTime = this._minutes % 5;
-                while ((currentTime = currentTime - 1) >= 0)
-                {
-                    minutes[currentIndex++] = true;
-                }
-
-                return minutes;
-            }
-        }
+        public Boolean[] MinutesBulbs => intToBooleanBulb(this._minutes % 5, 4);
 
         public BerlinClockImpl(string inputTime)
         {
             if (String.IsNullOrWhiteSpace(inputTime))
                 throw new ArgumentNullException(nameof(inputTime), IncorrectArgumentErrorMessage);
 
-            if (DateTime.TryParseExact(inputTime, "HH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.AssumeLocal, out DateTime parsedInputTime) == false)
+            if (DateTime.TryParseExact(inputTime, TimeFormat, CultureInfo.CurrentCulture, DateTimeStyles.AssumeLocal, out DateTime parsedInputTime) == false)
             {
                 if (inputTime != Midnight2400)
                     throw new ArgumentException(nameof(inputTime), IncorrectArgumentErrorMessage);
                 else
-                {
                     _hours = 24;
-                    _minutes = 0;
-                    _seconds = 0;
-                }
             }
             else
             {
@@ -116,18 +55,6 @@ namespace BerlinClock.Classes
                 _minutes = parsedInputTime.Minute;
                 _hours = parsedInputTime.Hour;
             }
-        }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine(String.Format("{0}", Blinker ? Yellow : Empty));
-            sb.AppendLine(String.Join("", Fivers.Select(f => f ? Red : Empty)));
-            sb.AppendLine(String.Join("", Hours.Select(h => h ? Red : Empty)));
-            int i = 0;
-            sb.AppendLine(String.Join("", MinutesFivers.Select(v => v ? (++i % 3 == 0 ? Red : Yellow) : Empty)));
-            sb.Append(String.Join("", Minutes.Select(m => m ? Yellow: Empty)));
-            return sb.ToString();
         }
     }
 }

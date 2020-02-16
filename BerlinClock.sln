@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerlinClock", "BerlinClock.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerlinClock.Tests", "BerlinClock.Tests\BerlinClock.Tests.csproj", "{FC712FA2-B788-4B38-AE79-C0B95B83019C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerlinClock.Console", "BerlinClock.Console\BerlinClock.Console.csproj", "{16863636-7663-4A96-AAAF-9FFE2034A0DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FC712FA2-B788-4B38-AE79-C0B95B83019C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC712FA2-B788-4B38-AE79-C0B95B83019C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC712FA2-B788-4B38-AE79-C0B95B83019C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16863636-7663-4A96-AAAF-9FFE2034A0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16863636-7663-4A96-AAAF-9FFE2034A0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16863636-7663-4A96-AAAF-9FFE2034A0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16863636-7663-4A96-AAAF-9FFE2034A0DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

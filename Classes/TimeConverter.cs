@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using BerlinClock.Abstraction;
+using System;
 
 namespace BerlinClock
 {
     public class TimeConverter : ITimeConverter
     {
-        public string convertTime(string aTime)
+        private IClockRenderer<String> _renderer;
+
+        public TimeConverter(IClockRenderer<String> renderer)
         {
-            return new Classes.BerlinClockImpl(aTime).ToString();
+            _renderer = renderer;
+        }
+
+        public string ConvertTime(string aTime)
+        {
+            return _renderer.RenderClocks(new Classes.BerlinClockImpl(aTime));
         }
     }
 }
