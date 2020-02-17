@@ -78,5 +78,14 @@ namespace BerlinClock.Tests
             Assert.AreEqual(minutes, actual.Minutes);
             Assert.AreEqual(seconds, actual.Seconds);
         }
+
+        [TestMethod]
+        public void ReturnIsIncorrectTrueIfTimeIncorrect()
+        {
+            Assert.IsFalse(Time.FromInt32(240000).IsIncorrect);
+            Assert.IsTrue(Time.Incorrect.IsIncorrect);
+            Assert.IsFalse(new Time(12, 34, 56).IsIncorrect);
+            Assert.IsTrue(new Time(542323, 323232, 2898392).IsIncorrect);
+        }
     }
 }
