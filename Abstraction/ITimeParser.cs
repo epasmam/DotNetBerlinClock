@@ -1,7 +1,9 @@
-﻿namespace BerlinClock.Abstraction
+﻿using System;
+
+namespace BerlinClock.Abstraction
 {
     public interface ITimeParser
     {
-        Time GetTimeFromString(string inputTime);
+        Time GetTimeFromString(String inputTime);
     }
 }

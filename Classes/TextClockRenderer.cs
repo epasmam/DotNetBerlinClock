@@ -8,7 +8,7 @@ namespace BerlinClock.Classes
 {
     public class TextClockRenderer : IClockRenderer<String>
     {
-
+        private const Int32 QuarterBulbNumber = 3;
         private const Char Yellow = 'Y';
         private const Char Red = 'R';
         private const Char Empty = 'O';
@@ -20,7 +20,7 @@ namespace BerlinClock.Classes
             sb.AppendLine(String.Join("", clock.FiveHoursBulbs.Select(f => f ? Red : Empty)));
             sb.AppendLine(String.Join("", clock.HoursBulbs.Select(h => h ? Red : Empty)));
             int i = 0;
-            sb.AppendLine(String.Join("", clock.FiveMinutesBulbs.Select(v => v ? (++i % 3 == 0 ? Red : Yellow) : Empty)));
+            sb.AppendLine(String.Join("", clock.FiveMinutesBulbs.Select(v => v ? (++i % QuarterBulbNumber == 0 ? Red : Yellow) : Empty)));
             sb.Append(String.Join("", clock.MinutesBulbs.Select(m => m ? Yellow : Empty)));
             return sb.ToString();
         }

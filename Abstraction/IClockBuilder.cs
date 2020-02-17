@@ -1,7 +1,9 @@
-﻿namespace BerlinClock.Abstraction
+﻿using System;
+
+namespace BerlinClock.Abstraction
 {
     public interface IClockBuilder
     {
-        IBerlinClock BuildClocks(string inputTime);
+        IBerlinClock BuildClocks(String inputTime);
     }
 }

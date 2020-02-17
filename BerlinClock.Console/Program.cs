@@ -10,7 +10,7 @@ namespace BerlinClock.ConsoleOutput
     /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        static void Main(String[] args)
         {
             ITimeConverter timeConverter = new TimeConverter(new TextClockRenderer(), new ClockBuilder(new TimeParser()));
             while (Console.KeyAvailable == false)

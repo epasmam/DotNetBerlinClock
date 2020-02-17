@@ -4,15 +4,20 @@ namespace BerlinClock.Abstraction
 {
     public struct Time
     {
+        private const Int32 NegativeOne = -1;
+        private const Int32 MaxHour = 24;
+        private const Int32 MaxMinute = 59;
+        private const Int32 MaxSecond = 59;
+
         public readonly Int32 Hours;
         public readonly Int32 Minutes;
         public readonly Int32 Seconds;
 
         public Time(Int32 hours, Int32 minutes, Int32 seconds)
         {
-            if (hours >= 24 && (minutes != 00 || seconds != 00)
-                || minutes > 59
-                || seconds > 59)
+            if (hours >= MaxHour && (minutes != 00 || seconds != 00)
+                || minutes > MaxMinute
+                || seconds > MaxSecond)
             {
                 this = Time.Incorrect;
             }
@@ -26,7 +31,7 @@ namespace BerlinClock.Abstraction
 
         public readonly Boolean IsIncorrect => this.Equals(Incorrect);
 
-        public readonly static Time Incorrect = new Time(-1, -1, -1);
+        public readonly static Time Incorrect = new Time(NegativeOne, NegativeOne, NegativeOne);
 
         public static Time FromInt32(Int32 timeInInt32)
         {

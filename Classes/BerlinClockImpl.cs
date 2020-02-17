@@ -6,18 +6,23 @@ namespace BerlinClock.Classes
 {
     public class BerlinClockImpl : IBerlinClock
     {
+        private const Int32 BulbsInTopRow = 4;
+        private const Int32 BulbsInSecondRow = 4;
+        private const Int32 BulbsInThirdRow = 11;
+        private const Int32 BulbsInFourthRow = 4;
+        private const Int32 ClockDivisor = 5;
 
         private Time _timeToShow;
 
         public Boolean Blinker => (this._timeToShow.Seconds & 1) == 0;
 
-        public IEnumerable<Boolean> FiveHoursBulbs => switchOnBulbLights(this._timeToShow.Hours / 5, 4);
+        public IEnumerable<Boolean> FiveHoursBulbs => switchOnBulbLights(this._timeToShow.Hours / ClockDivisor, BulbsInTopRow);
 
-        public IEnumerable<Boolean> HoursBulbs => switchOnBulbLights(this._timeToShow.Hours % 5, 4);
+        public IEnumerable<Boolean> HoursBulbs => switchOnBulbLights(this._timeToShow.Hours % ClockDivisor, BulbsInSecondRow);
 
-        public IEnumerable<Boolean> FiveMinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes / 5, 11);
+        public IEnumerable<Boolean> FiveMinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes / ClockDivisor, BulbsInThirdRow);
 
-        public IEnumerable<Boolean> MinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes % 5, 4);
+        public IEnumerable<Boolean> MinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes % ClockDivisor, BulbsInFourthRow);
 
         public BerlinClockImpl(Time timeToShow)
         {
@@ -30,7 +35,7 @@ namespace BerlinClock.Classes
         {
             var result = new Boolean[bulbsCount];
             int currentIndex = 0;
-            while ((turnOnBulbsNumber = turnOnBulbsNumber - 1) >= 0)
+            while (--turnOnBulbsNumber >= 0)
             {
                 result[currentIndex++] = true;
             }
