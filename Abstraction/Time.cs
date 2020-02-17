@@ -10,18 +10,34 @@ namespace BerlinClock.Abstraction
 
         public Time(Int32 hours, Int32 minutes, Int32 seconds)
         {
-            this.Hours = hours;
-            this.Minutes = minutes;
-            this.Seconds = seconds;
+            if (hours >= 24 && (minutes != 00 || seconds != 00)
+                || minutes > 59
+                || seconds > 59)
+            {
+                this = Time.Incorrect;
+            }
+            else
+            {
+                this.Hours = hours;
+                this.Minutes = minutes;
+                this.Seconds = seconds;
+            }
         }
 
         public readonly Boolean IsIncorrect => this.Equals(Incorrect);
 
         public readonly static Time Incorrect = new Time(-1, -1, -1);
 
-        public static Time FromInt(int timeInInt)
+        public static Time FromInt32(Int32 timeInInt32)
         {
-            return new Time(timeInInt / 10000, timeInInt / 100 % 100, timeInInt % 100);
+            if (timeInInt32 < 0)
+                return Time.Incorrect;
+
+            Int32 hours = timeInInt32 / 10000;
+            Int32 minutes = timeInInt32 / 100 % 100;
+            Int32 seconds = timeInInt32 % 100;
+
+            return new Time(hours, minutes, seconds);
         }
     }
 }

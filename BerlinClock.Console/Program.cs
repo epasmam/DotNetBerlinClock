@@ -5,6 +5,9 @@ using BerlinClock.Classes;
 
 namespace BerlinClock.ConsoleOutput
 {
+    /// <summary>
+    /// Very basic console visualizer for Berlin Clock for visual tests
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

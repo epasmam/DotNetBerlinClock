@@ -52,7 +52,7 @@ namespace BerlinClock.Tests
         [DataRow("13:49:33")]
         [DataRow("09:53:03")]
         [DataRow("01:10:01")]
-        public void ParseCorrectTimeProperly(string correctTime)
+        public void ParseCorrectTimeProperly(String correctTime)
         {
             // Arrange
             var timeParser = new TimeParser();

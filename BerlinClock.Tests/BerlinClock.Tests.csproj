@@ -67,6 +67,7 @@
     <Compile Include="TimeParserShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClockBuilderShould.cs" />
+    <Compile Include="TimeShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

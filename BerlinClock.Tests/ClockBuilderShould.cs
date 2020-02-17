@@ -1,7 +1,8 @@
 ﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using BerlinClock.Abstraction;
 using BerlinClock.Classes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BerlinClock.Tests
 {
@@ -21,7 +22,7 @@ namespace BerlinClock.Tests
         [DataRow(null)]
         [DataRow("")]
         [DataRow(" ")]
-        public void ThrowArgumentNullExceptionInBuildClocksOnNullOrEmptyTime(string time)
+        public void ThrowArgumentNullExceptionInBuildClocksOnNullOrEmptyTime(String time)
         {
             // Arrange
             var timeParser = new Moq.Mock<ITimeParser>();
@@ -59,7 +60,7 @@ namespace BerlinClock.Tests
         {
             // Arrange
             var timeParser = new Moq.Mock<ITimeParser>();
-            timeParser.Setup(parser => parser.GetTimeFromString(Moq.It.IsAny<String>())).Returns(Time.FromInt(123456)).Verifiable();
+            timeParser.Setup(parser => parser.GetTimeFromString(Moq.It.IsAny<String>())).Returns(Time.FromInt32(123456)).Verifiable();
 
             var builder = new ClockBuilder(timeParser.Object);
 

@@ -18,7 +18,7 @@ namespace BerlinClock.Classes
             this._timeParser = timeParser;
         }
 
-        public IBerlinClock BuildClocks(string inputTime)
+        public IBerlinClock BuildClocks(String inputTime)
         {
             if (String.IsNullOrWhiteSpace(inputTime))
                 throw new ArgumentNullException(nameof(inputTime), IncorrectArgumentErrorMessage);

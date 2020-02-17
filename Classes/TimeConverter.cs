@@ -21,7 +21,7 @@ namespace BerlinClock.Classes
             this._builder = builder;
         }
 
-        public string ConvertTime(string aTime)
+        public String ConvertTime(String aTime)
         {
             IBerlinClock clock = this._builder.BuildClocks(aTime);
             return _renderer.RenderClocks(clock);

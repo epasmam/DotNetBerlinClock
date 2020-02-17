@@ -1,6 +1,7 @@
-﻿using BerlinClock.Abstraction;
-using System;
+﻿using System;
 using System.Globalization;
+
+using BerlinClock.Abstraction;
 
 namespace BerlinClock.Classes
 {
@@ -17,7 +18,7 @@ namespace BerlinClock.Classes
                 ? new Time(parsedInputTime.Hour, parsedInputTime.Minute, parsedInputTime.Second)
                 : inputTime != Midnight2400
                     ? Time.Incorrect
-                    : new Time(24, 0, 0);
+                    : Time.FromInt32(240000);
             return result;
         }
     }

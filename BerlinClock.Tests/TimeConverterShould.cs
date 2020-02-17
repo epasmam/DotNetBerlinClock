@@ -39,7 +39,7 @@ namespace BerlinClock.Tests
             var builderMock = new Moq.Mock<IClockBuilder>();
             builderMock.Setup(b => b.BuildClocks(Moq.It.IsAny<String>())).Returns(result).Verifiable();
 
-            var rendererMock = new Moq.Mock<IClockRenderer<string>>();
+            var rendererMock = new Moq.Mock<IClockRenderer<String>>();
             rendererMock.Setup(m => m.RenderClocks(Moq.It.Is<IBerlinClock>(clock => result.Equals(clock)))).Returns(expected).Verifiable();
 
             var converter = new TimeConverter(rendererMock.Object, builderMock.Object);

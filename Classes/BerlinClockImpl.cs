@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using BerlinClock.Abstraction;
 
 namespace BerlinClock.Classes
@@ -11,13 +11,13 @@ namespace BerlinClock.Classes
 
         public Boolean Blinker => (this._timeToShow.Seconds & 1) == 0;
 
-        public Boolean[] FiveHoursBulbs => switchOnBulbLights(this._timeToShow.Hours / 5, 4);
+        public IEnumerable<Boolean> FiveHoursBulbs => switchOnBulbLights(this._timeToShow.Hours / 5, 4);
 
-        public Boolean[] HoursBulbs => switchOnBulbLights(this._timeToShow.Hours % 5, 4);
+        public IEnumerable<Boolean> HoursBulbs => switchOnBulbLights(this._timeToShow.Hours % 5, 4);
 
-        public Boolean[] FiveMinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes / 5, 11);
+        public IEnumerable<Boolean> FiveMinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes / 5, 11);
 
-        public Boolean[] MinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes % 5, 4);
+        public IEnumerable<Boolean> MinutesBulbs => switchOnBulbLights(this._timeToShow.Minutes % 5, 4);
 
         public BerlinClockImpl(Time timeToShow)
         {
@@ -26,7 +26,7 @@ namespace BerlinClock.Classes
             this._timeToShow = timeToShow;
         }
 
-        private Boolean[] switchOnBulbLights(int turnOnBulbsNumber, int bulbsCount)
+        private IEnumerable<Boolean> switchOnBulbLights(Int32 turnOnBulbsNumber, Int32 bulbsCount)
         {
             var result = new Boolean[bulbsCount];
             int currentIndex = 0;
